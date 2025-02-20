@@ -13,7 +13,6 @@ int main()
 {
     std::cout << "TYPE set to: " << typeid(TYPE).name() << std::endl;
 
-
     vector<TYPE> arr;
 
     #define MY_PI 3.1415926536
