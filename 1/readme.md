@@ -42,13 +42,13 @@ Float variant:
 
 # Result
 
-With `param = 45.0`, the program using a double array returns:
+With `param = 0.52`, the program using a double array returns:
 ```cpp
-sum = 450 000 000.00
+sum = 4968801.37901000678539276
 ```
 While the program using a float array returns:
 ```cpp
-sum = 405 682 432.00
+sum = 4999514.50000000000000000
 ```
 A ~10% difference!
 

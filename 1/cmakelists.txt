@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(MyProject CXX)
 
-
+# google option
 # Define an option for setting the flag
 set(FLAG_TYPE "" CACHE STRING "Set to 'd' for double or 'f' for float")
 
