@@ -1,8 +1,8 @@
-#!/bin/zsh
+#!/bin/bash
 
 rm -fr build
 mkdir build && cd build
-cmake ..
+cmake .. -DBUILD_DOUBLE=ON -DBUILD_FLOAT=ON
 make
 ./main_d
 ./main_f

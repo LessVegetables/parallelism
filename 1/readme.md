@@ -18,14 +18,14 @@ cmake ..
 make
 ```
 CMake can generate either or both precision-specific binaries: main_d (uses a double array), main_f (uses a float array). By default, it builds both.
-To build only one of the programs, set the `-DFLAG_TYPE` flag to either `d` for double or `f` for float.
+To build only one of the programs, set the respective flag to `ON`:
 ```sh
-cmake .. -DFLAG_TYPE=d
+cmake .. -DBUILD_DOUBLE=ON
 make
 ```
 *or*
 ```sh
-cmake .. -DFLAG_TYPE=f
+cmake .. -DBUILD_FLOAT=ON
 make
 ```
 
@@ -42,14 +42,11 @@ Float variant:
 
 # Result
 
-With `param = 0.52`, the program using a double array returns:
+The program using a double array returns:
 ```cpp
-sum = 4968801.37901000678539276
+sum = 0.00000011892797511
 ```
 While the program using a float array returns:
 ```cpp
-sum = 4999514.50000000000000000
+sum = 0.00000011892797147
 ```
-A ~10% difference!
-
-This task perfectly illustrates the importance of choosing the right type when precision is key.
