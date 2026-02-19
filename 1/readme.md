@@ -44,9 +44,9 @@ Float variant:
 
 The program using a double array returns:
 ```cpp
-sum = 0.00000011892797511
+sum = -0.00000000067691628
 ```
 While the program using a float array returns:
 ```cpp
-sum = 0.00000011892797147
+sum = -0.21389430761337280
 ```
