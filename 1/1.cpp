@@ -11,7 +11,7 @@
 #endif
 
 #ifndef ARR_LENGTH
-#define ARR_LENGTH 10000000.0
+#define ARR_LENGTH 10'000'000.0
 #endif
 
 int main()
