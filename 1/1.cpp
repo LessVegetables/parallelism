@@ -24,9 +24,8 @@ int main()
 
     for (int i = 0; i < ARR_LENGTH; i++)
     {
-        arr.push_back(sin(delta));
+        arr.push_back(sin(delta * i));
         sum += arr[i];
-        sum /= (2.0 * M_PI);
     }
 
     std::cout << std::fixed
