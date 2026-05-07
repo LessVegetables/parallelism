@@ -1,4 +1,5 @@
-#include <stdio.h>
+// #include <stdio.h>
+#include <iosream>
 #include <omp.h>
 
 int main (int argc, char **argv){
