@@ -29,9 +29,9 @@ void run_parallel(int m, int n)
 {
     double *a, *b, *c;
     // Allocate memory for 2-d array a[m, n]
-    a = xmalloc(sizeof(*a) * m * n);
-    b = xmalloc(sizeof(*b) * n);
-    c = xmalloc(sizeof(*c) * m);
+    a = malloc(sizeof(*a) * m * n);
+    b = malloc(sizeof(*b) * n);
+    c = malloc(sizeof(*c) * m);
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++)
         a[i * n + j] = i + j;
@@ -40,9 +40,9 @@ void run_parallel(int m, int n)
     for (int j = 0; j < n; j++)
         b[j] = j;
 
-    double t = wtime();
+    double t = time();
     matrix_vector_product_omp(a, b, c, m, n);
-    t = wtime() - t;
+    t = time() - t;
 
     printf("Elapsed time (parallel): %.6f sec.\n", t);
     free(a);
