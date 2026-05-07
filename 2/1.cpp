@@ -4,6 +4,8 @@
 
 using namespace std;
 
+int m = 10, n = 10;
+
 /* matrix_vector_product_omp: Compute matrix-vector product c[m] = a[m][n] * b[n] */
 void matrix_vector_product_omp(double *a, double *b, double *c, int m, int n)
 {
