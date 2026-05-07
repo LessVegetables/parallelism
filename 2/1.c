@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <omp.h>
 #include <time.h>
+#include <stdlib.h>
+#include <inttypes.h>
 
-using namespace std;
+// using namespace std;
 
 /* matrix_vector_product_omp: Compute matrix-vector product c[m] = a[m][n] * b[n] */
-void matrix_vector_product_omp(double *a, double *b, double *c, int m, int n)
+void matrix_vector_product_omp(double *a, double *b, double *c, double m, double n)
 {
     #pragma omp parallel
     {
@@ -23,7 +25,7 @@ void matrix_vector_product_omp(double *a, double *b, double *c, int m, int n)
 }
 
 
-void run_parallel(int m, int n)
+void run_parallel(double m, double n)
 {
     double *a, *b, *c;
     // Allocate memory for 2-d array a[m, n]
@@ -50,7 +52,7 @@ void run_parallel(int m, int n)
 
 int main(int argc, char **argv)
 {
-    int m = 10, n = 10;
+    double m = 10, n = 10;
     printf("Matrix-vector product (c[m] = a[m, n] * b[n]; m = %d, n = %d)\n", m, n);
     printf("Memory used: %" PRIu64 " MiB\n", ((m * n + m + n) * sizeof(double)) >> 20);
     // run_serial();
