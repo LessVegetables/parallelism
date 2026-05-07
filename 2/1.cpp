@@ -4,8 +4,6 @@
 
 using namespace std;
 
-int m = 10, n = 10;
-
 /* matrix_vector_product_omp: Compute matrix-vector product c[m] = a[m][n] * b[n] */
 void matrix_vector_product_omp(double *a, double *b, double *c, int m, int n)
 {
@@ -25,7 +23,7 @@ void matrix_vector_product_omp(double *a, double *b, double *c, int m, int n)
 }
 
 
-void run_parallel()
+void run_parallel(int m, int n)
 {
     double *a, *b, *c;
     // Allocate memory for 2-d array a[m, n]
@@ -52,9 +50,10 @@ void run_parallel()
 
 int main(int argc, char **argv)
 {
+    int m = 10, n = 10;
     printf("Matrix-vector product (c[m] = a[m, n] * b[n]; m = %d, n = %d)\n", m, n);
     printf("Memory used: %" PRIu64 " MiB\n", ((m * n + m + n) * sizeof(double)) >> 20);
     // run_serial();
-    run_parallel();
+    run_parallel(m, n);
     return 0;
 }
