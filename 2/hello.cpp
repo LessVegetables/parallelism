@@ -4,7 +4,7 @@
 int main (int argc, char **argv){
     #pragma omp parallel    /* <-- Fork */
     {
-        printf("Hello, multithreaded world: thread %d of %d\n", omp_get_thread_num(), omp_get_num_threads());
+        std::cout << "Hello, multithreaded world: thread " << omp_get_thread_num() << " of " << omp_get_num_threads()) << std::endl;
     }   /* <-- Barrier & join */
     return 0;
 }
