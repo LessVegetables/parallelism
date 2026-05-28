@@ -8,11 +8,6 @@
 static int M = 40000;
 static int N = 40000;
 
-static double wtime()
-{
-    return omp_get_wtime();
-}
-
 #include <chrono>
 /*
     Для C++ используйте библиотеку chrono
@@ -77,10 +72,8 @@ double run_serial()
     for (int j = 0; j < N; j++)
         b[j] = (double)j;
 
-    // double t = wtime();
     const auto start{std::chrono::steady_clock::now()};
     matrix_vector_product(a, b, c, M, N);
-    // t = wtime() - t;
     const auto end{std::chrono::steady_clock::now()};
 
     const std::chrono::duration<double> elapsed_seconds{end - start};
@@ -122,10 +115,8 @@ double run_parallel(int nthreads)
         b[j] = (double)j;
 
     // ---- Параллельное вычисление ----
-    // double t = wtime();
     const auto start{std::chrono::steady_clock::now()};
     matrix_vector_product_omp(a, b, c, M, N);
-    // t = wtime() - t;
     const auto end{std::chrono::steady_clock::now()};
     const std::chrono::duration<double> elapsed_seconds{end - start};
     double t = elapsed_seconds.count();
