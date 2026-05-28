@@ -1,11 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <cstdint>
 #include <omp.h>
 
 // Matrix dimensions (set via command line or defaults)
-static int M = 20000;
-static int N = 20000;
+static int M = 40000;
+static int N = 40000;
 
 static double wtime()
 {
@@ -140,6 +141,47 @@ double run_parallel(int nthreads)
 
 
 int main(int argc, char **argv)
+{
+    // Sizes to benchmark
+    int sizes[][2] = {{20000, 20000}, {40000, 40000}};
+    int thread_counts[] = {1, 2, 4, 7, 8, 16, 20, 40};
+    int num_sizes = 2;
+    int num_threads = sizeof(thread_counts) / sizeof(thread_counts[0]);
+
+    // Open CSV for writing
+    std::ofstream csv("results.csv");
+    csv << "size,threads,time,speedup\n";
+
+    for (int s = 0; s < num_sizes; s++) {
+        M = sizes[s][0];
+        N = sizes[s][1];
+
+        std::cout << "\n=== Matrix " << M << "x" << N << " ===" << std::endl;
+
+        // Baseline: serial time
+        std::cout << "Running serial..." << std::flush;
+        double t1 = run_serial();
+        std::cout << " " << t1 << " sec" << std::endl;
+        csv << M << "," << 1 << "," << t1 << "," << 1.0 << "\n";
+
+        // Parallel runs
+        for (int k = 1; k < num_threads; k++) {
+            int p = thread_counts[k];
+            std::cout << "Running p=" << p << "..." << std::flush;
+            double tp = run_parallel(p);
+            double sp = t1 / tp;
+            std::cout << " " << tp << " sec  (S=" << sp << ")" << std::endl;
+            csv << M << "," << p << "," << tp << "," << sp << "\n";
+        }
+    }
+
+    csv.close();
+    std::cout << "\nResults saved to results.csv" << std::endl;
+    std::cout << "Now run: python3 plot_table.py" << std::endl;
+    return 0;
+}
+
+int oldMain(int argc, char **argv)
 {
     if (argc >= 3) {
         M = std::atoi(argv[1]);
