@@ -1,0 +1,11 @@
+Группы 24941, 24942, 24943, 24944 для решения уравнения теплопроводности использовать разностную схему. Подробности в материалах от 12.04 (lec_8_grid_calc.pdf и материалы по openacc). Базовое решение (https://github.com/OpenACC/openacc-training-materials/tree/master/labs/module2/English/C)
+
+Остальные группы используют метод из "parallel_lab1_2020.pdf" ( раздел "Задача о распределении тепла в пластинке" ). Базовое решение (https://github.com/vaperepelkin/therm).
+
+Для проверки верности алгоритма, сохраняте результатирующую матрицу в файл. 
+
+Не забывайте про make или cmake файл для сборки. К заданию приложить отчет и ссылку на GitHub.
+
+
+
+https://classroom.google.com/u/1/c/ODQyNDU4NDQzMTk5/m/ODQyNDU4NDQzMjM1/details
