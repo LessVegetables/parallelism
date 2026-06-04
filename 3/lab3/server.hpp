@@ -27,7 +27,7 @@ public:
         });
     }
 
-    // ждет завершения всех задач в очереди
+    // дожидается завершения всех задач в очереди
     void stop() {
         worker_.request_stop();
         cond_var_.notify_all();
@@ -53,7 +53,7 @@ public:
         std::future<T> fut;
         {
             std::unique_lock<std::mutex> lock(res_mut_);
-            // ждем пока результат появится в results или future станет доступен
+            // ждем пока результат появится в results_ или future станет доступен
             res_cv_.wait(lock, [this, id] {
                 return results_.count(id) > 0;
             });
@@ -74,7 +74,7 @@ private:
             TaskEntry entry;
             {
                 std::unique_lock<std::mutex> lock(queue_mut_);
-                cond_var_.wait(lock, [this, &stoken] {
+                cond_var_.wait(lock, [this, &stoken] {                  //////////////?
                     return !task_queue_.empty() || stoken.stop_requested();
                 });
 
@@ -88,7 +88,7 @@ private:
                 task_queue_.pop();
             }
 
-            entry.task(); // выполнение задачи
+            entry.task(); // выполняем задачу
 
             // получаем результат из future и сохраняем в results
             T result = futures_.at(entry.id).get();

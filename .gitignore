@@ -30,3 +30,6 @@ CMakeUserPresets.json
 
 *.o
 max
+
+
+build
