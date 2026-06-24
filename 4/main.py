@@ -1,15 +1,6 @@
 """
-Python Thread — Task 1: Control Signal Formation
-=================================================
-Reads data from sensors (SensorCam + 3*SensorX) in separate threads/processes,
-displays the camera frame with overlaid sensor values in a window.
-
-Professor's note: threads AND processes are both supported via --mode flag
-so you can compare latency between them.
-
-Usage:
-    python main.py --camera /dev/video0 --resolution 1280x720 --fps 30
-    python main.py --camera /dev/video0 --resolution 640x480  --fps 15 --mode process
+python main.py --camera /dev/video0 --resolution 1280x720 --fps 30 --mode thread
+python main.py --camera /dev/video0 --resolution 640x480  --fps 15 --mode process
 """
 
 import argparse
@@ -44,8 +35,6 @@ class Sensor:
 
 
 class SensorX(Sensor):
-    """Sensor X"""
-
     def __init__(self, delay: float):
         self._delay = delay
         self._data = 0
@@ -57,7 +46,7 @@ class SensorX(Sensor):
 
 
 class SensorCam(Sensor):
-    """USB-camera sensor wrapper (OpenCV)."""
+    """camera sensor wrapper (OpenCV)"""
 
     def __init__(self, camera_name: str, resolution: str):
         self._log = logging.getLogger("SensorCam")
@@ -86,7 +75,7 @@ class SensorCam(Sensor):
         self._log.info("Camera opened successfully.")
 
     def _parse_camera_name(self, name: str):
-        """Accept '/dev/video0' → 0, or a bare integer string."""
+        """accept /dev/video0, or a bare integer string."""
         if name.startswith("/dev/video"):
             try:
                 return int(name.replace("/dev/video", ""))
@@ -98,7 +87,7 @@ class SensorCam(Sensor):
             return name  # let OpenCV try as a path
 
     def get(self):
-        """Return the latest frame, or None on failure."""
+        """return the latest frame, or none on failure."""
         if self._cam is None or not self._cam.isOpened():
             self._log.error("Camera is not available (disconnected?).")
             return None
@@ -115,7 +104,7 @@ class SensorCam(Sensor):
 
 
 class WindowImage:
-    """Displays the composed image in an OpenCV window."""
+    """displays the composed image in an OpenCV window"""
 
     WINDOW_NAME = "Sensor View"
 
@@ -136,8 +125,8 @@ class WindowImage:
 
     def show(self, img: np.ndarray) -> bool:
         """
-        Display img.  Returns False if the user pressed 'q' or closed
-        the window, True otherwise.
+        display img.  Returns false if the user pressed 'q' or closed
+        the window, true otherwise.
         """
         try:
             cv2.imshow(self.WINDOW_NAME, img)
@@ -157,8 +146,8 @@ class WindowImage:
 
 def sensor_x_worker(sensor: SensorX, out_queue, stop_event):
     """
-    Continuously reads from a SensorX and puts the latest value into
-    out_queue.  Keeps only the most recent reading (drain old values first).
+    continuously reads from a SensorX and puts the latest value into
+    out_queue. Keeps only the most recent reading (drain old values first).
     """
     while not stop_event.is_set():
         value = sensor.get()
@@ -173,7 +162,7 @@ def sensor_x_worker(sensor: SensorX, out_queue, stop_event):
 
 def sensor_cam_worker(sensor: SensorCam, out_queue, stop_event):
     """
-    Continuously reads frames from SensorCam and puts them into out_queue.
+    continuously reads frames from SensorCam and puts them into out_queue.
     """
     while not stop_event.is_set():
         frame = sensor.get()
@@ -190,7 +179,7 @@ def sensor_cam_worker(sensor: SensorCam, out_queue, stop_event):
 
 def _sensor_x_process_target(delay: float, out_queue: mp.Queue,
                               stop_event: mp.Event):
-    """Process target for SensorX (cannot pickle the object, recreate it)."""
+    """process target for SensorX (cannot pickle the object, recreate it)"""
     sensor = SensorX(delay)
     while not stop_event.is_set():
         value = sensor.get()
@@ -204,7 +193,7 @@ def _sensor_x_process_target(delay: float, out_queue: mp.Queue,
 
 def _sensor_cam_process_target(camera_name: str, resolution: str,
                                 out_queue: mp.Queue, stop_event: mp.Event):
-    """Process target for SensorCam."""
+    """process target for SensorCam"""
     sensor = SensorCam(camera_name, resolution)
     while not stop_event.is_set():
         frame = sensor.get()
@@ -221,8 +210,8 @@ def _sensor_cam_process_target(camera_name: str, resolution: str,
 
 def compose_frame(frame: np.ndarray, sensor_values: dict) -> np.ndarray:
     """
-    Overlay sensor readings on the camera frame.
-    A semi-transparent black box is drawn in the bottom-right corner.
+    overlay sensor readings on the camera frame
+    a semi-transparent black box is drawn in the bottom-right corner
     """
     img = frame.copy()
     h, w = img.shape[:2]
