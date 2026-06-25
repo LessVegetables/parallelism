@@ -1,0 +1,5 @@
+Grid: 512x512  tol: 1e-06  max_iter: 1000000  check: 1
+Iterations: 339599
+Error:      9.999842e-07
+Time:       298.631 s
+Saved:      result_512.txt
