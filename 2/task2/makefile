@@ -1,4 +1,4 @@
-CXX      = g++-15
+CXX      = g++
 CXXFLAGS = -O2 -fopenmp
 TARGET   = main.o
 

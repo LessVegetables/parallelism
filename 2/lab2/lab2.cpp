@@ -99,7 +99,7 @@ void Jacobi_v2(int N, double** A, double* F, double* X, int threads)
     #pragma omp parallel num_threads(threads) default(shared)
     {
         do {
-            #pragma omp for schedule(static)
+            #pragma omp for schedule(static) // static, dynamic, guided
             for (int i = 0; i < N; i++) {
                 TempX[i] = F[i];
                 for (int g = 0; g < N; g++)
@@ -194,7 +194,7 @@ double run_parallel_v2(int N, double** A, double* F, double* X, double* X_true, 
 
 int main()
 {
-    int sizes[] = {1000, 2500, 5000};   // adjust until serial takes ≥30s on your node
+    int sizes[] = {1000}; //, 2500, 5000};
     int thread_counts[] = {1, 2, 3, 4, 5, 6, 7, 8, 16, 20, 40};
     int num_sizes   = sizeof(sizes)        / sizeof(sizes[0]);
     int num_threads = sizeof(thread_counts) / sizeof(thread_counts[0]);
