@@ -1,0 +1,7 @@
+Generating SQLite file stage_profiles/g22_c50.sqlite from stage_profiles/g22_c50.nsys-rep
+Processing [stage_profiles/g22_c50.sqlite] with [/opt/nvidia/hpc_sdk/Linux_x86_64/23.11/profilers/Nsight_Systems/host-linux-x64/reports/nvtx_pushpop_sum.py]... 
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Range
+50.2,74819018,1,74819018.0,74819018.0,74819018,74819018,0.0,solve
+25.2,37463540,1000,37463.5,36297.5,35077,246533,8865.0,calcNext
+24.6,36665968,1000,36666.0,36433.5,34983,53168,1557.0,swap
+

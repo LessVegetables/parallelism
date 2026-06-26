@@ -1,0 +1,5 @@
+Grid: 1024x1024  tol: 1e-06  max_iter: 1000000  check: 1000
+Iterations: 1000000
+Error:      1.375752e-06
+Time:       65.811 s
+Saved:      result_1024.txt

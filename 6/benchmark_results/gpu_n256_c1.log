@@ -1,0 +1,5 @@
+Grid: 256x256  tol: 1e-06  max_iter: 1000000  check: 1
+Iterations: 102885
+Error:      9.999302e-07
+Time:       4.529 s
+Saved:      result_256.txt

@@ -1,0 +1,7 @@
+Generating SQLite file profile_n512.sqlite from profile_n512.nsys-rep
+Processing [profile_n512.sqlite] with [/opt/nvidia/hpc_sdk/Linux_x86_64/23.11/profilers/Nsight_Systems/host-linux-x64/reports/nvtx_pushpop_sum.py]... 
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Range
+50.4,11822082356,1,11822082356.0,11822082356.0,11822082356,11822082356,0.0,solve
+25.2,5923753634,339601,17443.3,16836.0,16054,3471350,9845.6,calcNext
+24.4,5718018274,339601,16837.5,16609.0,15797,1336745,4751.8,swap
+

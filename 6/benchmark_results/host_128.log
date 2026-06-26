@@ -1,5 +1,0 @@
-Grid: 128x128  tol: 1e-06  max_iter: 1000000  check: 1
-Iterations: 30074
-Error:      9.999803e-07
-Time:       1.540 s
-Saved:      result_128.txt
