@@ -6,6 +6,8 @@
 #include <string>
 #include <boost/program_options.hpp>
 
+
+// enable custom labels for nvidia's profiler
 #ifdef USE_NVTX
 #include <nvtx3/nvToolsExt.h>
 #define NVTX_PUSH(n) nvtxRangePushA(n)
@@ -22,6 +24,9 @@ static const double CORNER_TL = 10.0;
 static const double CORNER_TR = 20.0;
 static const double CORNER_BR = 30.0;
 static const double CORNER_BL = 20.0;
+
+
+
 
 // Fill boundary edges with linear interpolation between corners.
 // Interior is set to 0. Both A and Anew get the same boundary.
@@ -156,7 +161,8 @@ int main(int argc, char** argv) {
     int    iter  = 0;
 
     auto t0 = std::chrono::steady_clock::now();
-
+    
+    // copy A/Anew into gpu memory
     #pragma acc data copyin(A[0:n*n], Anew[0:n*n])
     {
         NVTX_PUSH("solve");
