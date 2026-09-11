@@ -78,15 +78,15 @@ if d21:
     swap = [r[2] * NS_US for r in d21]
 
     fig, ax = plt.subplots(figsize=(8, 5.5))
-    ax.plot(ns, calc, 'o-', color='#3498db', label='calcNext (5-точечный стенсил)')
-    ax.plot(ns, swap, 's-', color='#2ecc71', label='swap (копирование)')
+    ax.plot(ns, calc, 'o-', color='#3498db', label='calcNext')
+    ax.plot(ns, swap, 's-', color='#2ecc71', label='swap')
     ax.set_xscale('log', base=2)
     ax.set_yscale('log')
     ax.set_xticks(ns)
     ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
     ax.set_xlabel('Размер сетки n (NxN)')
     ax.set_ylabel('Среднее время этапа на итерацию, мкс')
-    ax.set_title('ГРАФИК 2.1 — время этапов решателя от размера сетки (GPU, check=1)')
+    ax.set_title('Время каждого этапа, от размера сетки (GPU, check=1)')
     ax.grid(True, which='both', ls=':', alpha=0.5)
     ax.legend()
     for x, y in zip(ns, calc):
@@ -120,7 +120,7 @@ if d22:
     ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
     ax.set_xlabel('--check (error считается раз в C итераций)')
     ax.set_ylabel('Среднее время calcNext на итерацию, мкс')
-    ax.set_title(f'ГРАФИК 2.2 — влияние --check на calcNext (GPU, n={N_22})')
+    ax.set_title(f'Влияние --check на calcNext (GPU, n={N_22})')
     ax.grid(True, which='both', ls=':', alpha=0.5)
     ax.legend()
     for x, y in zip(checks, calc):

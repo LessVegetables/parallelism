@@ -1,0 +1,9 @@
+Скачать CUDA Toolkit (https://developer.nvidia.com/cuda-toolkit)
+
+Перейти по ссылкам из категории Guides (https://www.openacc.org/resources).
+
+Jupyter Notebook (https://github.com/OpenACC/openacc-training-materials/tree/master). Пройти module2 и module3, разобраться как работают NVTX метки (путь до заголовочного файла /opt/nvidia/hpc_sdk/Linux_x86_64/23.11/cuda/12.3/include/).
+
+OpenACC Getting Started Guide (https://docs.nvidia.com/hpc-sdk/compilers/openacc-gs/#overview)
+
+При компиляции используйте опцию "-fast".
